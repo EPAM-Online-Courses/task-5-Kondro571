@@ -15,7 +15,7 @@ import java.util.Set;
 import java.util.TreeMap;
 public class GameLobby {
 
-    public static final String HERO_NOT_FOUND = "Nie ma takiego bohatera ";
+    public static final String HERO_NOT_FOUND = "Nie ma takiego bohatera";
     public static final String NO_SUCH_TOWN = "Nie ma takiego miasta ";
 
     private final DataProvider dataProvider;
