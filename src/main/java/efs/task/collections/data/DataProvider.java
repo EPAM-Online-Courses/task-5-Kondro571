@@ -3,7 +3,10 @@ package efs.task.collections.data;
 import efs.task.collections.entity.Hero;
 import efs.task.collections.entity.Town;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class DataProvider {
 
@@ -23,8 +26,9 @@ public class DataProvider {
             for (int i = 0; i < parts.length; i++) {
                 parts[i] = parts[i].replace(" ", "");
             }
+            List<String> heroClass = List.of(parts[1], parts[2]);
 
-            listTowns.add(new Town(parts[0], new ArrayList<>(Arrays.asList(parts[1], parts[2]))));
+            listTowns.add(new Town(parts[0],heroClass));
         }
 
         return listTowns;
@@ -42,7 +46,9 @@ public class DataProvider {
                 parts[i] = parts[i].replace(" ", "");
             }
 
-            listDlcTowns.add(new Town(parts[0], new ArrayList<>(Arrays.asList(parts[1], parts[2]))));
+            List<String> heroClass = List.of(parts[1], parts[2]);
+
+            listDlcTowns.add(new Town(parts[0],heroClass));
         }
 
         return listDlcTowns;
@@ -63,7 +69,7 @@ public class DataProvider {
                 parts[i] = parts[i].replace(" ", "");
             }
 
-            heroesSet .add(new Hero(parts[0],parts[1]));
+            heroesSet.add(new Hero(parts[0],parts[1]));
 
         }
 
@@ -81,14 +87,15 @@ public class DataProvider {
             for (int i = 0; i < parts.length; i++) {
                 parts[i] = parts[i].replace(" ", "");
             }
+            if(heroesDlcSet.contains(new Hero(parts[0],parts[1]))) {
+                continue;
+            }
 
 
-            heroesDlcSet .add(new Hero(parts[0],parts[1]));
+            heroesDlcSet.add(new Hero(parts[0],parts[1]));
 
         }
 
         return heroesDlcSet;
     }
-
-
 }
