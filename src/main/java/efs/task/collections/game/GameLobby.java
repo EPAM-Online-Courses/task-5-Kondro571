@@ -34,18 +34,10 @@ public class GameLobby {
     //TODO Dodać miasta i odpowiadających im bohaterów z DLC gry do mapy dostępnych
     // miast - playableTownsWithHeroesList, tylko jeżeli jeszcze się na niej nie znajdują.
     public void enableDLC() {
-         for(Town town: dataProvider.getDLCTownsList()){
+        List<Hero> heroesDLC = List.copyOf(dataProvider.getDLCHeroesSet());
+        for(Town town: dataProvider.getDLCTownsList()){
             if(!playableTownsWithHeroesList.containsKey(town)){
-                playableTownsWithHeroesList.put(town,new ArrayList<>());
-            }
-            List<String> startingHeroes = town.getStartingHeroClasses();
-            List<Hero> heroesForTown = new ArrayList<>();
-
-            for(Hero hero : dataProvider.getDLCHeroesSet()){
-                if(startingHeroes.contains(hero.getHeroClass())){
-                    heroesForTown.add(hero);
-                }
-                playableTownsWithHeroesList.get(town).addAll(heroesForTown);
+                playableTownsWithHeroesList.put(town,heroesDLC);
             }
         }
     }
