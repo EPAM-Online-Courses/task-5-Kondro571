@@ -15,7 +15,7 @@ import java.util.Set;
 import java.util.TreeMap;
 public class GameLobby {
 
-    public static final String HERO_NOT_FOUND = "Nie ma takiego bohatera";
+    public static final String HERO_NOT_FOUND = "Nie ma takiego bohatera ";
     public static final String NO_SUCH_TOWN = "Nie ma takiego miasta ";
 
     private final DataProvider dataProvider;
@@ -34,10 +34,18 @@ public class GameLobby {
     //TODO Dodać miasta i odpowiadających im bohaterów z DLC gry do mapy dostępnych
     // miast - playableTownsWithHeroesList, tylko jeżeli jeszcze się na niej nie znajdują.
     public void enableDLC() {
-        List<Hero> heroesDLC = List.copyOf(dataProvider.getDLCHeroesSet());
-        for(Town town: dataProvider.getDLCTownsList()){
+         for(Town town: dataProvider.getDLCTownsList()){
             if(!playableTownsWithHeroesList.containsKey(town)){
-                playableTownsWithHeroesList.put(town,heroesDLC);
+                playableTownsWithHeroesList.put(town,new ArrayList<>());
+            }
+            List<String> startingHeroes = town.getStartingHeroClasses();
+            List<Hero> heroesForTown = new ArrayList<>();
+
+            for(Hero hero : dataProvider.getDLCHeroesSet()){
+                if(startingHeroes.contains(hero.getHeroClass())){
+                    heroesForTown.add(hero);
+                }
+                playableTownsWithHeroesList.get(town).addAll(heroesForTown);
             }
         }
     }
